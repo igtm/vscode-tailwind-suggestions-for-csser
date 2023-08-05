@@ -1,0 +1,11 @@
+{
+  "name": "tailwind-vscode-suggestion-ext",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/igtm/tailwind-vscode-suggestion-ext.git",
+  "author": "Tomokatsu Iguchi <github@igtm.link>",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}
