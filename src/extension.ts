@@ -2,6 +2,9 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 
+// custom files
+import { suggestList } from "./data/suggestList";
+
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -22,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
       vscode.CompletionItemKind.Event
     );
     completion.insertText = new vscode.SnippetString(tailwindClassName);
-    completion.documentation = new vscode.MarkdownString(`${css};`);
+    completion.documentation = new vscode.MarkdownString(css);
     return completion;
   }
 
@@ -31,24 +34,29 @@ export function activate(context: vscode.ExtensionContext) {
       document: vscode.TextDocument,
       position: vscode.Position
     ) {
-      const completions = [];
-      completions.push(makeCompletionItem("items-center", "align-items: center"));
-      completions.push(makeCompletionItem("items-left", "align-items: left"));
-
-      const fontSize = new vscode.CompletionItem(
-        "font-size:  (🌊text-)",
-        vscode.CompletionItemKind.Event
+      return Object.entries(suggestList).map(
+        ([cssProperties, tailwindClassName]) => {
+          return makeCompletionItem(tailwindClassName, cssProperties);
+        }
       );
-      fontSize.insertText = new vscode.SnippetString(
-        `text-\${1|lg,sm,${Array.from(
-          { length: 100 },
-          (v, k) => `[${k + 1}px]`
-        ).join(",")}|}`
-      );
-      fontSize.documentation = new vscode.MarkdownString("font-size");
-      completions.push(fontSize);
+      // const completions = [];
+      // completions.push(makeCompletionItem("items-center", "align-items: center"));
+      // completions.push(makeCompletionItem("items-left", "align-items: left"));
 
-      return completions;
+      // const fontSize = new vscode.CompletionItem(
+      //   "font-size:  (🌊text-)",
+      //   vscode.CompletionItemKind.Event
+      // );
+      // fontSize.insertText = new vscode.SnippetString(
+      //   `text-\${1|lg,sm,${Array.from(
+      //     { length: 100 },
+      //     (v, k) => `[${k + 1}px]`
+      //   ).join(",")}|}`
+      // );
+      // fontSize.documentation = new vscode.MarkdownString("font-size");
+      // completions.push(fontSize);
+
+      // return completions;
     },
   });
 
