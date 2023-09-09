@@ -4,6 +4,9 @@ import * as vscode from "vscode";
 
 // custom files
 import { suggestList } from "./data/suggestList";
+import { languages } from "./languages";
+import { Position, Range } from "vscode";
+import { matchClass } from "./class-matcher";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -26,19 +29,26 @@ export function activate(context: vscode.ExtensionContext) {
     );
     completion.insertText = new vscode.SnippetString(tailwindClassName);
     completion.documentation = new vscode.MarkdownString(css);
+    completion.sortText = "aa";
     return completion;
   }
 
-  const provider3 = vscode.languages.registerCompletionItemProvider("html", {
+  const provider3 = vscode.languages.registerCompletionItemProvider(languages, {
     provideCompletionItems(
       document: vscode.TextDocument,
       position: vscode.Position
     ) {
-      return Object.entries(suggestList).map(
-        ([cssProperties, tailwindClassName]) => {
-          return makeCompletionItem(tailwindClassName, cssProperties);
-        }
+      let lineUntilPos = document.getText(
+        new Range(new Position(position.line, 0), position)
       );
+      if (matchClass(lineUntilPos)) {
+        return Object.entries(suggestList).map(
+          ([cssProperties, tailwindClassName]) => {
+            return makeCompletionItem(tailwindClassName, cssProperties);
+          }
+        );
+      }
+
       // const completions = [];
       // completions.push(makeCompletionItem("items-center", "align-items: center"));
       // completions.push(makeCompletionItem("items-left", "align-items: left"));
