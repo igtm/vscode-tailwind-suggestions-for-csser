@@ -1,8 +1,33 @@
 {
-  "name": "tailwind-vscode-suggestion",
-  "displayName": "tailwind-vscode-suggestion",
-  "description": "",
+  "name": "tailwind-vscode-suggestions-for-csser",
+  "displayName": "TailwindCSS Suggestion for CSSer",
+  "description": "Suggest TailwindCSS class name from css property name",
+  "author": "Tomokatsu Iguchi <github@igtm.link>",
+  "contributors": [
+    "Tomokatsu Iguchi <github@igtm.link>",
+    "ym-darake <sakamoto.takumi.dev@gmail.com>",
+    "Gyo Tamura <35870680+t-gyo@users.noreply.github.com>"
+  ],
+  "license": "MIT",
   "version": "0.0.1",
+  "homepage": "https://github.com/igtm/vscode-tailwind-suggestions-for-csser",
+  "bugs": {
+    "url": "https://github.com/igtm/vscode-tailwind-suggestions-for-csser/issues",
+    "email": "vscode-tailwind-suggestions-for-csser@igtm.link"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/igtm/vscode-tailwind-suggestions-for-csser.git"
+  },
+  "publisher": "igtm",
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "css",
+    "intellisense",
+    "autocomplete",
+    "vscode"
+  ],
   "engines": {
     "vscode": "^1.81.0"
   },
@@ -10,13 +35,13 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:html"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "tailwind-vscode-suggestion.helloWorld",
+        "command": "tailwind-vscode-suggestions-for-csser.helloWorld",
         "title": "Hello World"
       }
     ]

@@ -29,46 +29,56 @@ export function activate(context: vscode.ExtensionContext) {
     );
     completion.insertText = new vscode.SnippetString(tailwindClassName);
     completion.documentation = new vscode.MarkdownString(css);
-    completion.sortText = "aa";
     return completion;
   }
 
-  const provider3 = vscode.languages.registerCompletionItemProvider(languages, {
-    provideCompletionItems(
-      document: vscode.TextDocument,
-      position: vscode.Position
-    ) {
-      let lineUntilPos = document.getText(
-        new Range(new Position(position.line, 0), position)
-      );
-      if (matchClass(lineUntilPos)) {
-        return Object.entries(suggestList).map(
-          ([cssProperties, tailwindClassName]) => {
-            return makeCompletionItem(tailwindClassName, cssProperties);
-          }
+  // possibly conflicts with tailwindcss intellisense
+  // @see https://stackoverflow.com/a/67279173
+  const provider3 = vscode.languages.registerCompletionItemProvider(
+    languages,
+    {
+      provideCompletionItems(
+        document: vscode.TextDocument,
+        position: vscode.Position
+      ) {
+        let lineUntilPos = document.getText(
+          new Range(new Position(position.line, 0), position)
         );
-      }
+        console.log(
+          "provideCompletionItems!!! ",
+          lineUntilPos,
+          matchClass(lineUntilPos)
+        );
+        if (matchClass(lineUntilPos)) {
+          return Object.entries(suggestList).map(
+            ([cssProperties, tailwindClassName]) => {
+              return makeCompletionItem(tailwindClassName, cssProperties);
+            }
+          );
+        }
 
-      // const completions = [];
-      // completions.push(makeCompletionItem("items-center", "align-items: center"));
-      // completions.push(makeCompletionItem("items-left", "align-items: left"));
+        // const completions = [];
+        // completions.push(makeCompletionItem("items-center", "align-items: center"));
+        // completions.push(makeCompletionItem("items-left", "align-items: left"));
 
-      // const fontSize = new vscode.CompletionItem(
-      //   "font-size:  (🌊text-)",
-      //   vscode.CompletionItemKind.Event
-      // );
-      // fontSize.insertText = new vscode.SnippetString(
-      //   `text-\${1|lg,sm,${Array.from(
-      //     { length: 100 },
-      //     (v, k) => `[${k + 1}px]`
-      //   ).join(",")}|}`
-      // );
-      // fontSize.documentation = new vscode.MarkdownString("font-size");
-      // completions.push(fontSize);
+        // const fontSize = new vscode.CompletionItem(
+        //   "font-size:  (🌊text-)",
+        //   vscode.CompletionItemKind.Event
+        // );
+        // fontSize.insertText = new vscode.SnippetString(
+        //   `text-\${1|lg,sm,${Array.from(
+        //     { length: 100 },
+        //     (v, k) => `[${k + 1}px]`
+        //   ).join(",")}|}`
+        // );
+        // fontSize.documentation = new vscode.MarkdownString("font-size");
+        // completions.push(fontSize);
 
-      // return completions;
+        // return completions;
+      },
     },
-  });
+    ...[" ", '"', "'"]
+  );
 
   context.subscriptions.push(provider3);
 }
