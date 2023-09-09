@@ -8,6 +8,18 @@ import fs from "fs";
 const output1 = JSON.parse(fs.readFileSync("./output1.json"));
 
 const suggestList = Object.entries(output1)
+  .map(([tailwindClassName, cssObject]) => {
+    // 0. pick representive css
+    return [
+      tailwindClassName,
+      [["text-", "font-size"]].reduce((acc, [prefix, props]) => {
+        if (tailwindClassName.indexOf(prefix) === 0) {
+          return { [props]: acc[props] };
+        }
+        return acc;
+      }, cssObject),
+    ];
+  })
   .filter(([tailwindClassName, cssObject]) => {
     // 1. only 1 css properties
     return Object.keys(cssObject).length === 1;
@@ -17,6 +29,10 @@ const suggestList = Object.entries(output1)
     return !["transform-cpu", "transform-gpu", "transform-none"].includes(
       tailwindClassName
     );
+  })
+  .filter(([tailwindClassName, cssObject]) => {
+    // 3. remove custom css variables
+    return Object.keys(cssObject).every((c) => c.indexOf("--tw-") === -1);
   })
   .reduce((acc, [tailwindClassName, cssObject]) => {
     Object.entries(cssObject).forEach(([k, v]) => {

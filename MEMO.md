@@ -19,8 +19,9 @@
         - [ ] corePlugins.js: 定義ファイル
             - [x] addUtilities: そのままの定義なので一番簡単そう
             - [x] createUtilityPlugin: config.full.js　との合わせ技だった気がする
-            - [ ] addDefaults: ？
-            - [ ] matchUtilities: ？
+            - [-] addDefaults: ？ --tw- 系のやつしかないしやらなくていいかも
+            - [x] matchUtilities: ？
+              - [ ] 例外系をもうちょっと救済する(２プロパティ以上あるやつは代表値を使うなど)
         - [ ] config.full.js: 設定ファイルの完全系（STUB）
     - [ ] 任意の値系のサジェストいい感じに
     - [ ] 言語認識、発火条件

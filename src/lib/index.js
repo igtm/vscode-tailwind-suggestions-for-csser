@@ -1,7 +1,6 @@
 import { corePlugins } from "./corePlugins.js";
 import config from "./config.full.js";
 import fs from "fs";
-import { paramCase } from "change-case";
 
 const ret = {};
 Object.keys(corePlugins).forEach((key) => {
@@ -16,39 +15,40 @@ Object.keys(corePlugins).forEach((key) => {
       },
       theme: (name, flag) => {
         // TODO: hoge
-        return config.theme;
+        // dot nested
+        return name.split(".").reduce((acc, n) => {
+          return acc[n];
+        }, config.theme);
       },
       addComponents: (name, flag) => {
         // TODO: hoge
       },
       matchUtilities: (obj1, obj2) => {
-        // TODO: hoge
         Object.entries(obj1).map(([classPrefix, property]) => {
-          const temp = obj1[classPrefix]("HOGE", { modifier: "mod" });
-          Object.keys(temp).forEach((k) => {
-            if (obj2) {
-              let modifierCSSMap = {};
-              // function or object
-              if (typeof obj2.values[k] === "function") {
-                modifierCSSMap = obj2.values[k]({
-                  theme: () => ({}),
-                  breakpoints: () => ({}),
-                });
-              }
-              if (typeof obj2.values[k] === "object") {
-                modifierCSSMap = obj2.values[k];
-              }
-              Object.entries(modifierCSSMap).map(([modifier, cssValue]) => {
-                ret[`${classPrefix}-${modifier}`] = {
-                  [paramCase(k)]: cssValue,
-                };
-                fs.writeFileSync(
-                  "./output1.json",
-                  JSON.stringify(ret, null, 2)
-                );
+          if (obj2) {
+            let modifierCSSMap = {};
+            // function or object
+            if (typeof obj2.values === "function") {
+              modifierCSSMap = obj2.values({
+                theme: () => ({}),
+                breakpoints: () => ({}),
               });
             }
-          });
+            if (typeof obj2.values === "object") {
+              modifierCSSMap = obj2.values;
+            }
+            Object.entries(modifierCSSMap).map(([modifier, cssValue]) => {
+              let className = classPrefix;
+              if (modifier !== "DEFAULT") {
+                className = `${classPrefix}-${modifier}`;
+              }
+              const csses = obj1[classPrefix](cssValue, {
+                modifier: obj2.modifiers ? obj2.modifiers[modifier] : "MOD",
+              });
+              ret[className] = csses;
+              fs.writeFileSync("./output1.json", JSON.stringify(ret, null, 2));
+            });
+          }
         });
 
         return {};

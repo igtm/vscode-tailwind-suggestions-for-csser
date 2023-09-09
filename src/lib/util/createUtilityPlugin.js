@@ -1,4 +1,5 @@
 import transformThemeValue from './transformThemeValue.js'
+import { paramCase } from "change-case";
 
 export default function createUtilityPlugin(
   themeKey,
@@ -17,9 +18,9 @@ export default function createUtilityPlugin(
             [classPrefix]: (value) => {
               return properties.reduce((obj, name) => {
                 if (Array.isArray(name)) {
-                  return Object.assign(obj, { [name[0]]: name[1] })
+                  return Object.assign(obj, { [paramCase(name[0])]: name[1] })
                 }
-                return Object.assign(obj, { [name]: transformValue(value) })
+                return Object.assign(obj, { [paramCase(name)]: transformValue(value) })
               }, {})
             },
           })
