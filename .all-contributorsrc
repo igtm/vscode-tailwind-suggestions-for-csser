@@ -15,6 +15,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "t-gyo",
+      "name": "Gyo Tamura",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35870680?v=4",
+      "profile": "https://gitlab.com/gyo",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
