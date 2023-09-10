@@ -8,6 +8,24 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "igtm",
+      "name": "Iguchi Tomokatsu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6331737?v=4",
+      "profile": "https://github.com/igtm",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "t-gyo",
+      "name": "Gyo Tamura",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35870680?v=4",
+      "profile": "https://gitlab.com/gyo",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "ymdarake",
       "name": "ym-darake",
       "avatar_url": "https://avatars.githubusercontent.com/u/19996540?v=4",
