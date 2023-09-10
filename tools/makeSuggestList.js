@@ -13,7 +13,10 @@ const suggestList = Object.entries(output1)
     return [
       tailwindClassName,
       [["text-", "font-size"]].reduce((acc, [prefix, props]) => {
-        if (tailwindClassName.indexOf(prefix) === 0) {
+        if (
+          tailwindClassName.indexOf(prefix) === 0 &&
+          Object.keys(acc).find((k) => k === props)
+        ) {
           return { [props]: acc[props] };
         }
         return acc;
@@ -36,12 +39,12 @@ const suggestList = Object.entries(output1)
   })
   .reduce((acc, [tailwindClassName, cssObject]) => {
     Object.entries(cssObject).forEach(([k, v]) => {
-      acc[`${k}: ${v};`] = tailwindClassName;
+      acc[`${k}:${v};`] = tailwindClassName;
     });
     return acc;
   }, {});
 
 fs.writeFileSync(
-  "../data/suggestList.ts",
+  "../src/data/suggestList.ts",
   `export const suggestList = ${JSON.stringify(suggestList, null, 2)}`
 );

@@ -1,7 +1,3 @@
-# tailwind-vscode-suggestion-ext
-
-
-
 # TODO
 
 - [x] extension 眺めてみる
@@ -24,16 +20,12 @@
               - [ ] 例外系をもうちょっと救済する(２プロパティ以上あるやつは代表値を使うなど)
         - [ ] config.full.js: 設定ファイルの完全系（STUB）
     - [ ] 任意の値系のサジェストいい感じに
-    - [ ] 言語認識、発火条件
-      - [x] HTML
-      - [ ] React
-      - [ ] Vue
-      - [ ] ...
-    - [ ] 設定ファイル化
+    - [x] 言語認識、発火条件
+    - [x] 設定ファイル化
 
 
 - [ ] Naming
-  - Headwind (gyaku)
+  - Headwind (reverse)
   - Tailwind Completion for CSSer
 
 
