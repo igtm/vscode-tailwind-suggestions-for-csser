@@ -63,6 +63,7 @@ Not all TailwindCSS class names are supported (complicated shadow css ..etc)
 <table>
   <tbody>
     <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/igtm"><img src="https://avatars.githubusercontent.com/u/6331737?v=4?s=100" width="100px;" alt="Iguchi Tomokatsu"/><br /><sub><b>Iguchi Tomokatsu</b></sub></a><br /><a href="https://github.com/igtm/vscode-tailwind-suggestions-for-csser/commits?author=igtm" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://gitlab.com/gyo"><img src="https://avatars.githubusercontent.com/u/35870680?v=4?s=100" width="100px;" alt="Gyo Tamura"/><br /><sub><b>Gyo Tamura</b></sub></a><br /><a href="https://github.com/igtm/vscode-tailwind-suggestions-for-csser/commits?author=t-gyo" title="Code">💻</a></td>
     </tr>
   </tbody>
