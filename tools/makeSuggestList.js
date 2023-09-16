@@ -23,6 +23,28 @@ const suggestList = Object.entries(output1)
       }, cssObject),
     ];
   })
+  .map(([tailwindClassName, cssObject]) => {
+    // 0. pick representive css
+    //   - VALUE: replace var( with ....
+    //   - FIELD: remove @defaults field
+    //   - FIELD: remove --tw field
+    // 1. only 1 css properties
+    for (const [k, v] of Object.entries(cssObject)) {
+      if (k.indexOf("--tw") !== -1) {
+        continue;
+      }
+      if (k.indexOf("@defaults") !== -1) {
+        continue;
+      }
+      if (typeof v === "string" && v.indexOf("var(") !== -1) {
+        const a = tailwindClassName.split("-");
+        const newV =
+          a.length > 1 ? a.slice(1).join("-") : `default-${tailwindClassName}`;
+        return [tailwindClassName, { [k]: `[${newV}]` }];
+      }
+    }
+    return [tailwindClassName, cssObject];
+  })
   .filter(([tailwindClassName, cssObject]) => {
     // 1. only 1 css properties
     return Object.keys(cssObject).length === 1;
