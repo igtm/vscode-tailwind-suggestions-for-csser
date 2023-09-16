@@ -9,7 +9,7 @@
     "Gyo Tamura <35870680+t-gyo@users.noreply.github.com>"
   ],
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/igtm/vscode-tailwind-suggestions-for-csser",
   "bugs": {
     "url": "https://github.com/igtm/vscode-tailwind-suggestions-for-csser/issues",
@@ -37,6 +37,10 @@
   "activationEvents": [
     "onStartupFinished"
   ],
+  "galleryBanner": {
+    "color": "#487cca"
+  },
+  "icon": "media/icon.png",
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {

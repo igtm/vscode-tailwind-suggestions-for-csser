@@ -4,6 +4,10 @@ All notable changes to the "tailwind-vscode-suggestions-for-csser" extension wil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.3] - 2023-09-16
+
+- set icon
+
 ## [0.0.2] - 2023-09-16
 
 - support color snippets
